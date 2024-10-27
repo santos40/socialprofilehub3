@@ -7,6 +7,11 @@ interface BusinessSEOProps {
 }
 
 export const BusinessSEO = ({ business, id }: BusinessSEOProps) => {
+  // Extract city and region from address
+  const addressParts = business.address.split(',').map(part => part.trim());
+  const city = addressParts[1] || '';
+  const region = addressParts[2] || '';
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -15,9 +20,9 @@ export const BusinessSEO = ({ business, id }: BusinessSEOProps) => {
     image: business.logo,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: business.address,
-      addressLocality: 'Silicon Valley',
-      addressRegion: 'CA',
+      streetAddress: addressParts[0],
+      addressLocality: city,
+      addressRegion: region,
       addressCountry: 'US'
     },
     geo: {
@@ -42,6 +47,8 @@ export const BusinessSEO = ({ business, id }: BusinessSEOProps) => {
     ].filter(Boolean)
   };
 
+  const canonicalUrl = `${window.location.origin}/business/${id}`;
+
   return (
     <Helmet>
       <title>{`${business.name} - Business Directory`}</title>
@@ -50,11 +57,12 @@ export const BusinessSEO = ({ business, id }: BusinessSEOProps) => {
       <meta property="og:description" content={business.description} />
       <meta property="og:image" content={business.logo} />
       <meta property="og:type" content="business.business" />
+      <meta property="og:url" content={canonicalUrl} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={business.name} />
       <meta name="twitter:description" content={business.description} />
       <meta name="twitter:image" content={business.logo} />
-      <link rel="canonical" href={`https://yourdomain.com/business/${id}`} />
+      <link rel="canonical" href={canonicalUrl} />
       <script type="application/ld+json">
         {JSON.stringify(jsonLd)}
       </script>
