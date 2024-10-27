@@ -8,10 +8,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { UseFormReturn } from 'react-hook-form';
-import { BusinessFormData } from '@/types/business';
+import { ExtendedBusinessFormData } from '../BusinessRegistrationForm';
 
 interface BasicInfoFieldsProps {
-  form: UseFormReturn<BusinessFormData>;
+  form: UseFormReturn<ExtendedBusinessFormData>;
 }
 
 export const BasicInfoFields = ({ form }: BasicInfoFieldsProps) => {
@@ -25,6 +25,20 @@ export const BasicInfoFields = ({ form }: BasicInfoFieldsProps) => {
             <FormLabel>Business Name</FormLabel>
             <FormControl>
               <Input placeholder="Enter your business name" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
+        name="email"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Email Address</FormLabel>
+            <FormControl>
+              <Input type="email" placeholder="Enter your email address" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

@@ -5,25 +5,18 @@ import * as z from 'zod';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form } from '@/components/ui/form';
 import { BusinessFormData } from '@/types/business';
 import { RegistrationFields } from './RegistrationFields';
 import { useState } from 'react';
 import { Home } from 'lucide-react';
+import { sendWelcomeEmail } from '@/utils/emailUtils';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Business name must be at least 2 characters'),
+  email: z.string().email('Please enter a valid email address'),
   description: z.string().min(10, 'Description must be at least 10 characters'),
   logo: z.string().url('Please enter a valid URL for the logo'),
   category: z.string().min(2, 'Category is required'),
@@ -39,14 +32,17 @@ const formSchema = z.object({
   photos: z.array(z.string().url('Please enter valid URLs for photos')).optional(),
 });
 
+export type ExtendedBusinessFormData = BusinessFormData & { email: string };
+
 export const BusinessRegistrationForm = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const form = useForm<BusinessFormData>({
+  const form = useForm<ExtendedBusinessFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
+      email: '',
       description: '',
       logo: '',
       category: '',
@@ -63,15 +59,26 @@ export const BusinessRegistrationForm = () => {
     },
   });
 
-  const onSubmit = async (data: BusinessFormData) => {
+  const onSubmit = async (data: ExtendedBusinessFormData) => {
     try {
       // TODO: Implement actual API call here
       console.log('Form data:', data);
       
-      toast({
-        title: "Success!",
-        description: "Your business has been registered successfully.",
-      });
+      // Send welcome email
+      const emailSent = await sendWelcomeEmail(data.email, data.name);
+      
+      if (emailSent) {
+        toast({
+          title: "Success!",
+          description: "Your business has been registered successfully. Welcome email sent!",
+        });
+      } else {
+        toast({
+          title: "Partial Success",
+          description: "Business registered successfully, but we couldn't send the welcome email.",
+          variant: "destructive",
+        });
+      }
       
       setIsSubmitted(true);
     } catch (error) {
