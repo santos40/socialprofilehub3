@@ -11,6 +11,7 @@ import { Business } from '@/types/business';
 const mockBusiness: Business = {
   id: '1',
   name: 'Tech Solutions Inc',
+  email: 'contact@techsolutions.com',
   description: 'Leading technology solutions provider specializing in web development and cloud services.',
   logo: 'https://via.placeholder.com/150',
   category: 'Technology',

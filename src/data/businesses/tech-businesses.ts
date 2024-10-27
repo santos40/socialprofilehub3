@@ -4,6 +4,7 @@ export const techBusinesses: Business[] = [
   {
     id: '1',
     name: 'TechHub Solutions',
+    email: 'info@techhub.com',
     description: 'Leading software development company specializing in web applications and cloud solutions. We help businesses transform their digital presence.',
     logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b',
     category: 'Technology',
@@ -23,6 +24,7 @@ export const techBusinesses: Business[] = [
   {
     id: '3',
     name: 'CloudTech Services',
+    email: 'support@cloudtech.com',
     description: 'Expert cloud computing solutions and infrastructure management for businesses of all sizes.',
     logo: 'https://images.unsplash.com/photo-1518770660439-4636190af475',
     category: 'Technology',

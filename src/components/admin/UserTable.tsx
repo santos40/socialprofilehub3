@@ -32,6 +32,7 @@ export const UserTable = ({ onEdit, onDelete }: UserTableProps) => {
     {
       id: "1",
       name: "Example Business",
+      email: "example@business.com",
       description: "Example description",
       logo: "https://example.com/logo.png",
       category: "Technology",

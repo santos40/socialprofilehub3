@@ -4,6 +4,7 @@ export const serviceBusinesses: Business[] = [
   {
     id: '2',
     name: 'Digital Marketing Pro',
+    email: 'info@digitalmarketingpro.com',
     description: 'Full-service digital marketing agency helping businesses grow their online presence through SEO, social media, and content marketing.',
     logo: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d',
     category: 'Marketing',
@@ -23,6 +24,7 @@ export const serviceBusinesses: Business[] = [
   {
     id: '5',
     name: 'Cyber Security Plus',
+    email: 'security@cybersecplus.com',
     description: 'Comprehensive cybersecurity solutions protecting businesses from digital threats and vulnerabilities.',
     logo: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
     category: 'Security',

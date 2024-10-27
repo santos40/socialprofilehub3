@@ -4,6 +4,7 @@ export const educationBusinesses: Business[] = [
   {
     id: '4',
     name: 'CodeCraft Academy',
+    email: 'info@codecraft.edu',
     description: 'Premier coding bootcamp offering intensive programming courses and career development support.',
     logo: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6',
     category: 'Education',
@@ -23,6 +24,7 @@ export const educationBusinesses: Business[] = [
   {
     id: '10',
     name: 'Tech Training Hub',
+    email: 'contact@techtraining.edu',
     description: 'Comprehensive technology training and certification programs for IT professionals.',
     logo: 'https://images.unsplash.com/photo-1473091534298-04dcbce3278c',
     category: 'Education',

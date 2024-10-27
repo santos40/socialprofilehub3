@@ -4,6 +4,7 @@ export const specializedBusinesses: Business[] = [
   {
     id: '11',
     name: 'Green Energy Solutions',
+    email: 'info@greenenergy.com',
     description: 'Sustainable energy solutions and consulting for businesses looking to reduce their carbon footprint and implement eco-friendly practices.',
     logo: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9',
     category: 'Energy',
@@ -23,6 +24,7 @@ export const specializedBusinesses: Business[] = [
   {
     id: '12',
     name: 'HealthTech Innovations',
+    email: 'contact@healthtech.com',
     description: 'Healthcare technology solutions provider specializing in telemedicine platforms and medical software systems.',
     logo: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d',
     category: 'Healthcare',
