@@ -20,7 +20,10 @@ export function MainNav() {
           <MenubarMenu>
             <Link to="/">
               <MenubarTrigger className="font-bold text-base sm:text-xl">
-                SocialProfileHubs.com
+                <span className="text-blue-600">Social</span>
+                <span className="text-orange-500">Profile</span>
+                <span className="text-red-600">Hub</span>
+                <span className="text-gray-700">.com</span>
               </MenubarTrigger>
             </Link>
           </MenubarMenu>
