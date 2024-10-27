@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { MainNav } from "./components/MainNav";
+import { Footer } from "./components/Footer";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { ErrorBoundary } from "./components/ErrorBoundary";
@@ -58,6 +59,7 @@ const App = () => (
                       } />
                     </Routes>
                   </main>
+                  <Footer />
                 </div>
               </BrowserRouter>
             </TooltipProvider>
