@@ -1,4 +1,4 @@
-import { Home, Building2, Plus, Settings } from "lucide-react";
+import { Home, Building2, Plus, Settings, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Menubar,
@@ -6,9 +6,17 @@ import {
   MenubarItem,
   MenubarMenu,
   MenubarTrigger,
+  MenubarSeparator,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
 } from "@/components/ui/menubar";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { languageNames } from "@/types/language";
 
 export function MainNav() {
+  const { language, setLanguage } = useLanguage();
+
   return (
     <Menubar className="border-b px-6 py-3 w-full">
       <MenubarMenu>
@@ -36,6 +44,24 @@ export function MainNav() {
               Admin Dashboard
             </MenubarItem>
           </Link>
+          <MenubarSeparator />
+          <MenubarSub>
+            <MenubarSubTrigger className="cursor-pointer">
+              <Globe className="mr-2 h-4 w-4" />
+              {languageNames[language]}
+            </MenubarSubTrigger>
+            <MenubarSubContent>
+              {Object.entries(languageNames).map(([code, name]) => (
+                <MenubarItem
+                  key={code}
+                  className="cursor-pointer"
+                  onClick={() => setLanguage(code as any)}
+                >
+                  {name}
+                </MenubarItem>
+              ))}
+            </MenubarSubContent>
+          </MenubarSub>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
