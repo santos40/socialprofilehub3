@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Star, Globe, Instagram, Facebook, Linkedin, Phone } from 'lucide-react';
+import { Star, Globe, Instagram, Facebook, Linkedin, Phone, Youtube } from 'lucide-react';
 import { Business } from '@/types/business';
 import { Link } from 'react-router-dom';
 
@@ -38,6 +38,16 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
               className="text-primary hover:text-primary/80"
             >
               <Globe className="w-5 h-5" />
+            </a>
+          )}
+          {business.youtube && (
+            <a
+              href={business.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-600 hover:text-red-700"
+            >
+              <Youtube className="w-5 h-5" />
             </a>
           )}
           {business.instagram && (

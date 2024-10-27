@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { BusinessMap } from '@/components/BusinessMap';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Star, Globe, Instagram, Facebook, Linkedin, Phone, MapPin } from 'lucide-react';
+import { Star, Globe, Instagram, Facebook, Linkedin, Phone, MapPin, Youtube } from 'lucide-react';
 import { Business } from '@/types/business';
 
 // Temporary mock data (replace with actual data fetching)
@@ -17,6 +17,7 @@ const mockBusiness: Business = {
   instagram: 'https://instagram.com',
   facebook: 'https://facebook.com',
   linkedin: 'https://linkedin.com',
+  youtube: 'https://youtube.com',
   whatsapp: '5551234567890',
   address: '123 Tech Street, Silicon Valley, CA',
   latitude: 37.7749,
@@ -76,6 +77,17 @@ const BusinessProfile = () => {
                       >
                         <Globe className="w-5 h-5" />
                         Website
+                      </a>
+                    )}
+                    {business.youtube && (
+                      <a
+                        href={business.youtube}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-red-600 hover:text-red-700"
+                      >
+                        <Youtube className="w-5 h-5" />
+                        YouTube
                       </a>
                     )}
                     {business.instagram && (

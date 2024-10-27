@@ -9,6 +9,7 @@ export interface Business {
   facebook?: string;
   linkedin?: string;
   whatsapp?: string;
+  youtube?: string;
   address: string;
   latitude: number;
   longitude: number;
