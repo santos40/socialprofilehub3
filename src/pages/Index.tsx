@@ -18,6 +18,7 @@ const mockBusinesses: Business[] = [
     instagram: 'https://instagram.com',
     facebook: 'https://facebook.com',
     linkedin: 'https://linkedin.com',
+    youtube: 'https://youtube.com',
     whatsapp: '5551234567890',
     address: '123 Tech Street, Silicon Valley, CA',
     latitude: 37.7749,
