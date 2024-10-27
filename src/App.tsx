@@ -8,6 +8,7 @@ import { MainNav } from "./components/MainNav";
 import Index from "./pages/Index";
 import BusinessProfile from "./pages/BusinessProfile";
 import Register from "./pages/Register";
+import Landing from "./pages/Landing";
 
 const queryClient = new QueryClient();
 
@@ -22,7 +23,8 @@ const App = () => (
             <MainNav />
             <main className="flex-1">
               <Routes>
-                <Route path="/" element={<Index />} />
+                <Route path="/" element={<Landing />} />
+                <Route path="/directory" element={<Index />} />
                 <Route path="/business/:id" element={<BusinessProfile />} />
                 <Route path="/register" element={<Register />} />
               </Routes>

@@ -1,4 +1,4 @@
-import { Home, User, Plus } from "lucide-react";
+import { Home, Building2, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Menubar,
@@ -12,14 +12,16 @@ export function MainNav() {
   return (
     <Menubar className="border-b px-6 py-3 w-full">
       <MenubarMenu>
-        <MenubarTrigger className="font-bold">
-          SocialProfileHub
-        </MenubarTrigger>
+        <Link to="/">
+          <MenubarTrigger className="font-bold">
+            SocialProfileHub
+          </MenubarTrigger>
+        </Link>
         <MenubarContent>
-          <Link to="/">
+          <Link to="/directory">
             <MenubarItem className="cursor-pointer">
-              <Home className="mr-2 h-4 w-4" />
-              Home
+              <Building2 className="mr-2 h-4 w-4" />
+              Business Directory
             </MenubarItem>
           </Link>
           <Link to="/register">
