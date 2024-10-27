@@ -3,9 +3,36 @@ import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-import { Building2, Users2, Globe2, TrendingUp } from 'lucide-react';
+import { Building2, Users2, Globe2, TrendingUp, Share2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Landing = () => {
+  const { toast } = useToast();
+
+  const handleShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: "SocialProfileHub - Business Directory & Social Media Integration",
+          text: "List your business for free and connect with potential customers. Integrate all your social media profiles in one place.",
+          url: window.location.href,
+        });
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        toast({
+          title: "Link copied!",
+          description: "The website link has been copied to your clipboard.",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error sharing",
+        description: "There was a problem sharing this website.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -20,6 +47,16 @@ const Landing = () => {
 
       <main className="container mx-auto px-4 py-12">
         <section className="text-center mb-16">
+          <div className="flex justify-end mb-4">
+            <Button
+              onClick={handleShare}
+              variant="outline"
+              size="icon"
+              className="rounded-full"
+            >
+              <Share2 className="h-4 w-4" />
+            </Button>
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
             Expand Your Business's Digital Footprint
           </h1>
