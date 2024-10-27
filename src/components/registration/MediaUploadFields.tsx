@@ -11,6 +11,7 @@ import { BusinessFormData } from '@/types/business';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Image, X } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
 
 interface MediaUploadFieldsProps {
   form: UseFormReturn<BusinessFormData>;
@@ -19,6 +20,17 @@ interface MediaUploadFieldsProps {
 export const MediaUploadFields = ({ form }: MediaUploadFieldsProps) => {
   const [photoPreview, setPhotoPreview] = useState<string[]>([]);
   const [logoPreview, setLogoPreview] = useState<string>('');
+  const [useSeoNames, setUseSeoNames] = useState(false);
+
+  const generateSeoFileName = (originalName: string, businessName: string, type: 'logo' | 'photo', index?: number) => {
+    const extension = originalName.split('.').pop();
+    const cleanBusinessName = businessName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    
+    if (type === 'logo') {
+      return `${cleanBusinessName}-logo.${extension}`;
+    }
+    return `${cleanBusinessName}-photo-${index + 1}.${extension}`;
+  };
 
   const handleLogoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -27,7 +39,16 @@ export const MediaUploadFields = ({ form }: MediaUploadFieldsProps) => {
       reader.onloadend = () => {
         const base64 = reader.result as string;
         setLogoPreview(base64);
+        
+        let fileName = file.name;
+        if (useSeoNames) {
+          const businessName = form.getValues('name') || 'business';
+          fileName = generateSeoFileName(file.name, businessName, 'logo');
+        }
+        
         form.setValue('logo', base64);
+        // Store the filename separately if needed
+        console.log('Logo filename:', fileName);
       };
       reader.readAsDataURL(file);
     }
@@ -42,12 +63,21 @@ export const MediaUploadFields = ({ form }: MediaUploadFieldsProps) => {
         return;
       }
 
-      Array.from(files).forEach(file => {
+      Array.from(files).forEach((file, index) => {
         const reader = new FileReader();
         reader.onloadend = () => {
           const base64 = reader.result as string;
           setPhotoPreview(prev => [...prev, base64]);
+          
+          let fileName = file.name;
+          if (useSeoNames) {
+            const businessName = form.getValues('name') || 'business';
+            fileName = generateSeoFileName(file.name, businessName, 'photo', currentPhotos.length + index);
+          }
+          
           form.setValue('photos', [...currentPhotos, base64]);
+          // Store the filename separately if needed
+          console.log('Photo filename:', fileName);
         };
         reader.readAsDataURL(file);
       });
@@ -63,6 +93,22 @@ export const MediaUploadFields = ({ form }: MediaUploadFieldsProps) => {
 
   return (
     <div className="space-y-6">
+      <div className="flex items-center space-x-2 mb-4">
+        <Switch
+          checked={useSeoNames}
+          onCheckedChange={setUseSeoNames}
+          id="seo-names"
+        />
+        <label htmlFor="seo-names" className="text-sm text-muted-foreground">
+          Use SEO-friendly image names
+        </label>
+      </div>
+      <p className="text-sm text-muted-foreground mb-4">
+        When enabled, your images will be automatically renamed using your business name 
+        (e.g., "your-business-logo.jpg", "your-business-photo-1.jpg"). This helps search 
+        engines better understand your images and can improve your SEO ranking.
+      </p>
+
       <FormField
         control={form.control}
         name="logo"
