@@ -8,10 +8,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { UseFormReturn } from 'react-hook-form';
-import { ExtendedBusinessFormData } from '../BusinessRegistrationForm';
+import { BusinessFormData } from '@/types/business';
 
 interface BasicInfoFieldsProps {
-  form: UseFormReturn<ExtendedBusinessFormData>;
+  form: UseFormReturn<BusinessFormData>;
 }
 
 export const BasicInfoFields = ({ form }: BasicInfoFieldsProps) => {

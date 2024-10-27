@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -32,13 +31,11 @@ const formSchema = z.object({
   photos: z.array(z.string().url('Please enter valid URLs for photos')).optional(),
 });
 
-export type ExtendedBusinessFormData = BusinessFormData & { email: string };
-
 export const BusinessRegistrationForm = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const form = useForm<ExtendedBusinessFormData>({
+  const form = useForm<BusinessFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
@@ -59,7 +56,7 @@ export const BusinessRegistrationForm = () => {
     },
   });
 
-  const onSubmit = async (data: ExtendedBusinessFormData) => {
+  const onSubmit = async (data: BusinessFormData) => {
     try {
       // TODO: Implement actual API call here
       console.log('Form data:', data);
