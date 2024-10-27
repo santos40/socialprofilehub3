@@ -8,7 +8,7 @@ export const Footer = () => {
     <footer className="mt-auto py-6 px-4">
       <Separator className="mb-6" />
       <div className="container mx-auto text-center text-sm text-muted-foreground">
-        <p>© {currentYear} SocialProfileHub. All rights reserved.</p>
+        <p>© {currentYear} SocialProfileHubs.com. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -9,7 +9,7 @@ const Landing = () => {
   return (
     <>
       <Helmet>
-        <title>SocialProfileHub - Expand Your Business's Digital Presence</title>
+        <title>SocialProfileHubs.com - Expand Your Business's Digital Presence</title>
         <meta name="description" content="Join SocialProfileHub to showcase your business, connect with customers, and grow your online presence. Free business directory listing with social media integration." />
         <meta name="keywords" content="business directory, local business, online presence, social media integration, business listing" />
         <link rel="canonical" href="https://socialprofilehub.com" />

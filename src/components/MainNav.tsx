@@ -22,7 +22,7 @@ export function MainNav() {
       <MenubarMenu>
         <Link to="/">
           <MenubarTrigger className="font-bold">
-            SocialProfileHub
+            SocialProfileHubs.com
           </MenubarTrigger>
         </Link>
         <MenubarContent className="bg-white border shadow-lg">
