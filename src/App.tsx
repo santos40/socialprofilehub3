@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
+import { MainNav } from "./components/MainNav";
 import Index from "./pages/Index";
 import BusinessProfile from "./pages/BusinessProfile";
 import Register from "./pages/Register";
@@ -17,11 +18,16 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/business/:id" element={<BusinessProfile />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
+          <div className="min-h-screen flex flex-col">
+            <MainNav />
+            <main className="flex-1">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/business/:id" element={<BusinessProfile />} />
+                <Route path="/register" element={<Register />} />
+              </Routes>
+            </main>
+          </div>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
