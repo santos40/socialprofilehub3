@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import BusinessProfile from "./pages/BusinessProfile";
 import Register from "./pages/Register";
 import Landing from "./pages/Landing";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
                 <Route path="/directory" element={<Index />} />
                 <Route path="/business/:id" element={<BusinessProfile />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/admin" element={<Admin />} />
               </Routes>
             </main>
           </div>

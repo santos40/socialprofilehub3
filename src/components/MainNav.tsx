@@ -1,4 +1,4 @@
-import { Home, Building2, Plus } from "lucide-react";
+import { Home, Building2, Plus, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Menubar,
@@ -28,6 +28,12 @@ export function MainNav() {
             <MenubarItem className="cursor-pointer">
               <Plus className="mr-2 h-4 w-4" />
               Add Business
+            </MenubarItem>
+          </Link>
+          <Link to="/admin">
+            <MenubarItem className="cursor-pointer">
+              <Settings className="mr-2 h-4 w-4" />
+              Admin Dashboard
             </MenubarItem>
           </Link>
         </MenubarContent>
