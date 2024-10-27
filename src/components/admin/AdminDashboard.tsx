@@ -4,6 +4,7 @@ import { UserForm } from './UserForm';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Business } from '@/types/business';
 
 export const AdminDashboard = () => {
   const [showAddUser, setShowAddUser] = useState(false);
