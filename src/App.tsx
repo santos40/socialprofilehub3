@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import Index from "./pages/Index";
 import BusinessProfile from "./pages/BusinessProfile";
+import Register from "./pages/Register";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/business/:id" element={<BusinessProfile />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
