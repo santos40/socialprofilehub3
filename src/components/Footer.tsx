@@ -1,6 +1,7 @@
 import React from "react";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -21,7 +22,9 @@ export const Footer = () => {
           </Button>
         </form>
         <p className="text-sm text-muted-foreground">
-          © {currentYear} SocialProfileHubs.com. All rights reserved.
+          <Link to="/" className="hover:underline">
+            © {currentYear} SocialProfileHubs.com. All rights reserved.
+          </Link>
         </p>
       </div>
     </footer>
