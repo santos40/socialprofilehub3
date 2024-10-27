@@ -7,6 +7,8 @@ import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 import {
   Form,
   FormControl,
@@ -16,6 +18,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { BusinessFormData } from '@/types/business';
+import { RegistrationFields } from './RegistrationFields';
+import { useState } from 'react';
+import { Home } from 'lucide-react';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Business name must be at least 2 characters'),
@@ -37,6 +42,7 @@ const formSchema = z.object({
 export const BusinessRegistrationForm = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const form = useForm<BusinessFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -67,7 +73,7 @@ export const BusinessRegistrationForm = () => {
         description: "Your business has been registered successfully.",
       });
       
-      navigate('/');
+      setIsSubmitted(true);
     } catch (error) {
       toast({
         title: "Error",
@@ -77,205 +83,49 @@ export const BusinessRegistrationForm = () => {
     }
   };
 
+  if (isSubmitted) {
+    return (
+      <Card className="max-w-2xl mx-auto p-6">
+        <CardHeader>
+          <CardTitle className="text-2xl text-center text-green-600">Registration Successful!</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <p className="text-center text-muted-foreground">
+            Thank you for registering your business with SocialProfileHub!
+          </p>
+          
+          <div className="flex flex-col items-center gap-4">
+            <form action="https://www.paypal.com/donate" method="post" target="_blank">
+              <input type="hidden" name="business" value="contato@vidrolimpo.com" />
+              <input type="hidden" name="currency_code" value="USD" />
+              <Button type="submit" className="bg-[#0070ba] hover:bg-[#003087] text-white">
+                Support Us with PayPal
+              </Button>
+            </form>
+
+            <div className="flex gap-4">
+              <Link to="/">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Home className="w-4 h-4" />
+                  Back to Home
+                </Button>
+              </Link>
+              <Link to="/directory">
+                <Button variant="outline">
+                  View Business Directory
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Business Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your business name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Description</FormLabel>
-              <FormControl>
-                <Textarea 
-                  placeholder="Describe your business"
-                  className="min-h-[100px]"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="logo"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Logo URL</FormLabel>
-                <FormControl>
-                  <Input placeholder="https://..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Category</FormLabel>
-                <FormControl>
-                  <Input placeholder="e.g., Technology, Food, Services" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="website"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Website (optional)</FormLabel>
-                <FormControl>
-                  <Input placeholder="https://..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="whatsapp"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>WhatsApp Number (optional)</FormLabel>
-                <FormControl>
-                  <Input placeholder="e.g., 5551234567890" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="instagram"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Instagram URL (optional)</FormLabel>
-                <FormControl>
-                  <Input placeholder="https://instagram.com/..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="facebook"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Facebook URL (optional)</FormLabel>
-                <FormControl>
-                  <Input placeholder="https://facebook.com/..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="linkedin"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>LinkedIn URL (optional)</FormLabel>
-                <FormControl>
-                  <Input placeholder="https://linkedin.com/..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="youtube"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>YouTube URL (optional)</FormLabel>
-                <FormControl>
-                  <Input placeholder="https://youtube.com/..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <FormField
-          control={form.control}
-          name="address"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Address</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your business address" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="latitude"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Latitude</FormLabel>
-                <FormControl>
-                  <Input type="number" step="any" placeholder="e.g., 37.7749" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="longitude"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Longitude</FormLabel>
-                <FormControl>
-                  <Input type="number" step="any" placeholder="e.g., -122.4194" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
+        <RegistrationFields form={form} />
         <Button type="submit" className="w-full">Register Business</Button>
       </form>
     </Form>
