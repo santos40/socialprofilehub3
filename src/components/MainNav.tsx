@@ -19,38 +19,51 @@ export function MainNav() {
 
   return (
     <Menubar className="border-b px-6 py-3 w-full bg-background">
-      <MenubarMenu>
-        <Link to="/">
-          <MenubarTrigger className="font-bold">
-            SocialProfileHubs.com
-          </MenubarTrigger>
-        </Link>
-        <MenubarContent className="bg-white border shadow-lg">
-          <Link to="/directory">
-            <MenubarItem className="cursor-pointer hover:bg-accent">
-              <Building2 className="mr-2 h-4 w-4" />
-              Business Directory
-            </MenubarItem>
-          </Link>
-          <Link to="/register">
-            <MenubarItem className="cursor-pointer hover:bg-accent">
-              <Plus className="mr-2 h-4 w-4" />
-              Add Business
-            </MenubarItem>
-          </Link>
-          <Link to="/admin">
-            <MenubarItem className="cursor-pointer hover:bg-accent">
-              <Settings className="mr-2 h-4 w-4" />
-              Admin Dashboard
-            </MenubarItem>
-          </Link>
-          <MenubarSeparator />
-          <MenubarSub>
-            <MenubarSubTrigger className="cursor-pointer hover:bg-accent">
-              <Globe className="mr-2 h-4 w-4" />
+      <div className="container mx-auto flex items-center justify-between">
+        <div className="flex items-center gap-8">
+          <MenubarMenu>
+            <Link to="/">
+              <MenubarTrigger className="font-bold text-xl">
+                SocialProfileHubs.com
+              </MenubarTrigger>
+            </Link>
+          </MenubarMenu>
+
+          <MenubarMenu>
+            <Link to="/directory">
+              <MenubarTrigger>
+                <Building2 className="mr-2 h-4 w-4 inline" />
+                Directory
+              </MenubarTrigger>
+            </Link>
+          </MenubarMenu>
+
+          <MenubarMenu>
+            <Link to="/register">
+              <MenubarTrigger>
+                <Plus className="mr-2 h-4 w-4 inline" />
+                Add Business
+              </MenubarTrigger>
+            </Link>
+          </MenubarMenu>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <MenubarMenu>
+            <Link to="/admin">
+              <MenubarTrigger>
+                <Settings className="mr-2 h-4 w-4 inline" />
+                Admin
+              </MenubarTrigger>
+            </Link>
+          </MenubarMenu>
+
+          <MenubarMenu>
+            <MenubarTrigger>
+              <Globe className="mr-2 h-4 w-4 inline" />
               {languageNames[language]}
-            </MenubarSubTrigger>
-            <MenubarSubContent className="bg-white border shadow-lg">
+            </MenubarTrigger>
+            <MenubarContent className="bg-white border shadow-lg">
               {Object.entries(languageNames).map(([code, name]) => (
                 <MenubarItem
                   key={code}
@@ -60,10 +73,10 @@ export function MainNav() {
                   {name}
                 </MenubarItem>
               ))}
-            </MenubarSubContent>
-          </MenubarSub>
-        </MenubarContent>
-      </MenubarMenu>
+            </MenubarContent>
+          </MenubarMenu>
+        </div>
+      </div>
     </Menubar>
   );
 }
